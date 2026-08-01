@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — KRIPTONSHARE</title>
+<meta name="description" content="Questions about KRIPTONSHARE? Leave your details and comments — we'll help you evaluate the platform and set up a demo.">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="contact">
+<div class="bg-glow"></div>
+<div class="bg-grid"></div>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/img/logo-mark.png" alt="KRIPTONSHARE logo">
+      <span class="nav-wordmark">KRIPTON<em>SHARE</em></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#features" data-i18n="nav.features">Features</a>
+      <a href="index.html#how" data-i18n="nav.how">How It Works</a>
+      <a href="index.html#use-cases" data-i18n="nav.usecases">Use Cases</a>
+      <a href="index.html#security" data-i18n="nav.security">Security</a>
+      <a href="contact.html" class="active" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle">
+        <button data-lang="es" onclick="KS_I18N.set('es')">ES</button>
+        <button data-lang="en" onclick="KS_I18N.set('en')" class="active">EN</button>
+      </div>
+      <a class="btn btn-ghost btn-sm" href="https://app.kriptonshare.com" data-i18n="nav.login">Log In</a>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <h1 data-i18n-html="contact.title">Have questions? <span class="accent">Let's talk.</span></h1>
+    <p data-i18n="contact.sub"></p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="container contact-grid">
+
+    <div class="contact-info reveal">
+      <h2 data-i18n="ci.h2">Talk to the team</h2>
+      <p data-i18n="ci.p"></p>
+      <div class="contact-methods">
+        <a class="contact-method" href="mailto:contacto@kriptonshare.com">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#39FF14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><b data-i18n="cm1.b">General & demos</b><span>contacto@kriptonshare.com</span></div>
+        </a>
+        <a class="contact-method" href="mailto:security@kriptonshare.com">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#39FF14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><b data-i18n="cm2.b">Security reports</b><span>security@kriptonshare.com</span></div>
+        </a>
+        <a class="contact-method" href="https://linkedin.com/company/kriptonshare" target="_blank" rel="noopener">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#39FF14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+          <div><b data-i18n="cm3.b">LinkedIn</b><span>linkedin.com/company/kriptonshare</span></div>
+        </a>
+      </div>
+      <p class="contact-expect" data-i18n-html="ce"></p>
+    </div>
+
+    <div class="form-card reveal">
+      <h2 style="font-size:22px;margin-bottom:26px" data-i18n="form.title">Send us a message</h2>
+      <form id="contact-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cf-name"><span data-i18n="form.name">Full name</span> <span class="req">*</span></label>
+            <input id="cf-name" name="name" type="text" required data-i18n-ph="form.name.ph" placeholder="Jane Doe">
+          </div>
+          <div class="form-group">
+            <label for="cf-company" data-i18n="form.company">Company</label>
+            <input id="cf-company" name="company" type="text" data-i18n-ph="form.company.ph" placeholder="Acme Corp">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cf-email"><span data-i18n="form.email">Work email</span> <span class="req">*</span></label>
+            <input id="cf-email" name="email" type="email" required data-i18n-ph="form.email.ph" placeholder="jane@acme.com">
+          </div>
+          <div class="form-group">
+            <label for="cf-phone" data-i18n="form.phone">Phone (optional)</label>
+            <input id="cf-phone" name="phone" type="tel" data-i18n-ph="form.phone.ph" placeholder="+1 555 000 0000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cf-interest" data-i18n="form.interest">I'm interested in</label>
+          <select id="cf-interest" name="interest">
+            <option value="demo" data-i18n="form.opt.demo">A product demo</option>
+            <option value="pricing" data-i18n="form.opt.pricing">Pricing & plans</option>
+            <option value="security" data-i18n="form.opt.security">Security & compliance review</option>
+            <option value="partner" data-i18n="form.opt.partner">Partnership / white-label</option>
+            <option value="other" data-i18n="form.opt.other">Something else</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cf-message"><span data-i18n="form.message">Your questions or comments</span> <span class="req">*</span></label>
+          <textarea id="cf-message" name="message" required data-i18n-ph="form.message.ph" placeholder=""></textarea>
+        </div>
+        <label class="consent">
+          <input type="checkbox" name="consent" value="yes" required>
+          <span data-i18n-html="form.consent"></span>
+        </label>
+        <button type="submit" class="btn btn-lime btn-block btn-lg" data-i18n="form.submit">Send message</button>
+        <div id="form-status" class="form-status" role="status"></div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/img/logo-full-alpha.png" alt="KRIPTONSHARE">
+        <p data-i18n="footer.brand"></p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.product">Product</h4>
+        <ul>
+          <li><a href="index.html#features" data-i18n="nav.features">Features</a></li>
+          <li><a href="index.html#how" data-i18n="nav.how">How It Works</a></li>
+          <li><a href="index.html#use-cases" data-i18n="nav.usecases">Use Cases</a></li>
+          <li><a href="index.html#security" data-i18n="nav.security">Security</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.company">Company</h4>
+        <ul>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+          <li><a href="https://app.kriptonshare.com" data-i18n="nav.login">Log In</a></li>
+          <li><a href="https://linkedin.com/company/kriptonshare" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.legal">Legal</h4>
+        <ul>
+          <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+          <li><a href="terms.html" data-i18n="footer.terms">Terms of Service</a></li>
+          <li><a href="mailto:security@kriptonshare.com">security@kriptonshare.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.copy">© 2026 KRIPTONSHARE. All rights reserved.</span>
+      <span class="mono" data-i18n="footer.tag">SECURITY · SPEED · TEMPORALITY</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
