@@ -1,6 +1,7 @@
 /* KRIPTONSHARE — admin-analytics.js */
 
 let chart = null;
+let chartContainerHTML = '';
 
 const els = {};
 
@@ -38,8 +39,14 @@ function updateStats(data) {
   const secondHalf = data.slice(half).reduce((sum, p) => sum + (Number(p.visits) || 0), 0);
   const trend = firstHalf === 0 ? (secondHalf > 0 ? 100 : 0) : ((secondHalf - firstHalf) / firstHalf) * 100;
 
-  if (els.total) els.total.textContent = fmtNumber(total);
-  if (els.max) els.max.textContent = fmtNumber(max);
+  if (els.total) {
+    els.total.textContent = fmtNumber(total);
+    els.total.classList.remove('text-red-500');
+  }
+  if (els.max) {
+    els.max.textContent = fmtNumber(max);
+    els.max.classList.remove('text-red-500');
+  }
 
   if (els.trend) {
     const sign = trend > 0 ? '+' : '';
@@ -47,6 +54,15 @@ function updateStats(data) {
     els.trend.classList.toggle('text-success', trend >= 0);
     els.trend.classList.toggle('text-red-500', trend < 0);
   }
+}
+
+function restoreChartContainer() {
+  const container = document.getElementById('chartContainer');
+  if (!container) return;
+  if (!document.getElementById('analyticsChart')) {
+    container.innerHTML = chartContainerHTML;
+  }
+  els.canvas = document.getElementById('analyticsChart');
 }
 
 function formatLabel(timestamp) {
@@ -108,24 +124,55 @@ async function fetchAnalytics(days) {
   clearError();
 
   try {
+    console.log(`[Analytics] Iniciando fetch para ${days} días...`);
     const response = await fetch(`/api/analytics?days=${days}`);
+    const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    console.log("[Analytics] Payload crudo recibido del backend:", data);
+
+    if (!response.ok || data.error) {
+      throw new Error(data.error || `HTTP Error: ${response.status}`);
     }
 
-    const payload = await response.json();
-    const data = Array.isArray(payload) ? payload : (payload.data || []);
+    if (!data.data || data.data.length === 0) {
+      console.warn("[Analytics] La API respondió correctamente pero el arreglo de datos está vacío (No hay tráfico RUM).");
+    }
 
-    const labels = data.map((point) => formatLabel(point.timestamp));
-    const dataPoints = data.map((point) => Number(point.visits) || 0);
+    const series = Array.isArray(data) ? data : (data.data || []);
+    const labels = series.map((point) => formatLabel(point.timestamp));
+    const dataPoints = series.map((point) => Number(point.visits) || 0);
 
-    updateStats(data);
+    restoreChartContainer();
+    updateStats(series);
     renderChart(labels, dataPoints);
   } catch (error) {
-    console.error('fetchAnalytics:', error);
+    console.error("[Analytics] Error crítico en la extracción de datos:", error);
+
+    if (chart) {
+      chart.destroy();
+      chart = null;
+    }
+
     resetStats();
-    showError('No se pudieron cargar los datos de analítica. Inténtalo de nuevo más tarde.');
+
+    document.querySelectorAll('.stat-value').forEach(el => {
+      el.textContent = "Error";
+      el.classList.add('text-red-500');
+    });
+
+    const chartContainer = document.getElementById('chartContainer');
+    if (chartContainer) {
+      chartContainer.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full text-red-600 bg-red-50 p-6 rounded-lg border border-red-200">
+            <svg class="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <h3 class="font-bold text-lg">Error de Comunicación con la API</h3>
+            <code class="mt-2 text-sm bg-white p-2 rounded shadow-sm">${error.message}</code>
+            <p class="mt-4 text-sm text-slate-500">Abre la consola del navegador (F12) para ver el payload completo.</p>
+        </div>
+      `;
+    }
+
+    showError('No se pudieron cargar los datos de analítica. Revisa la consola (F12) para más detalle.');
   } finally {
     setLoading(false);
   }
@@ -139,6 +186,9 @@ document.addEventListener('DOMContentLoaded', () => {
   els.max = document.getElementById('statMax');
   els.trend = document.getElementById('statTrend');
   els.dateRange = document.getElementById('dateRange');
+
+  const chartContainer = document.getElementById('chartContainer');
+  if (chartContainer) chartContainerHTML = chartContainer.innerHTML;
 
   if (els.dateRange) {
     els.dateRange.addEventListener('change', (event) => {

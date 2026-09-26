@@ -42,21 +42,21 @@
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
       <div class="bg-white rounded-lg shadow-sm border border-slate-100 p-6">
         <p class="text-sm text-textSec mb-2">Visitas Totales</p>
-        <p id="statTotal" class="text-3xl font-semibold text-textMain">—</p>
+        <p id="statTotal" class="stat-value text-3xl font-semibold text-textMain">—</p>
       </div>
       <div class="bg-white rounded-lg shadow-sm border border-slate-100 p-6">
         <p class="text-sm text-textSec mb-2">Máximo de Visitas por Hora</p>
-        <p id="statMax" class="text-3xl font-semibold text-textMain">—</p>
+        <p id="statMax" class="stat-value text-3xl font-semibold text-textMain">—</p>
       </div>
       <div class="bg-white rounded-lg shadow-sm border border-slate-100 p-6">
         <p class="text-sm text-textSec mb-2">Tendencia</p>
-        <p id="statTrend" class="text-3xl font-semibold text-success">—</p>
+        <p id="statTrend" class="stat-value text-3xl font-semibold text-success">—</p>
       </div>
     </section>
 
     <section class="bg-white rounded-lg shadow-sm border border-slate-100 p-6">
       <div id="loadingState" class="hidden text-sm text-textSec mb-4">Cargando datos…</div>
-      <div class="relative h-80 w-full">
+      <div id="chartContainer" class="relative h-80 w-full">
         <canvas id="analyticsChart"></canvas>
       </div>
     </section>
