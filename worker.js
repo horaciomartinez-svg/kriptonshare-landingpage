@@ -1,4 +1,5 @@
 import { onRequestPost as contactPost, onRequestOptions as contactOptions } from './functions/api/contact.js';
+import { onRequestGet as analyticsGet } from './functions/api/analytics.js';
 import { onRequestGet as roomGet } from './functions/room/[id].js';
 
 export default {
@@ -9,6 +10,12 @@ export default {
     if (url.pathname === '/api/contact') {
       if (request.method === 'OPTIONS') return contactOptions({ request, env });
       if (request.method === 'POST') return contactPost({ request, env });
+      return new Response('Method not allowed', { status: 405 });
+    }
+
+    // Dashboard de analítica (proxy Cloudflare Web Analytics)
+    if (url.pathname === '/api/analytics') {
+      if (request.method === 'GET') return analyticsGet({ request, env });
       return new Response('Method not allowed', { status: 405 });
     }
 
