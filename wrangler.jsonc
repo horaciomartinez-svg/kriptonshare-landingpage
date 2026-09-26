@@ -8,5 +8,9 @@
     "binding": "ASSETS"
   },
   "main": "worker.js",
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  "vars": {
+    "CF_ACCOUNT_ID": "67bec4f06347f4a150e12b5b2f23f77b",
+    "CF_SITE_TAG": "5aad2992495c4c4381afc8a5fe43601e"
+  }
 }
