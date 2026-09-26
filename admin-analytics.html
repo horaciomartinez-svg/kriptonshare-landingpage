@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rendimiento del Portal — Kriptonshare</title>
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563EB',
+            bgBase: '#F8FAFC',
+            textMain: '#0F172A',
+            textSec: '#64748B',
+            success: '#10B981'
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-bgBase text-textMain min-h-screen">
+  <main class="max-w-6xl mx-auto px-4 py-10">
+    <header class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <h1 class="text-3xl font-bold text-textMain">Rendimiento del Portal</h1>
+      <div class="flex items-center gap-3">
+        <label for="dateRange" class="text-sm text-textSec">Periodo</label>
+        <select id="dateRange" class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-textMain shadow-sm focus:outline-none focus:ring-2 focus:ring-primary">
+          <option value="7">Últimos 7 días</option>
+          <option value="30">Últimos 30 días</option>
+          <option value="90">Últimos 90 días</option>
+        </select>
+      </div>
+    </header>
+
+    <section id="errorState" class="hidden mb-8 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert"></section>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white rounded-lg shadow-sm border border-slate-100 p-6">
+        <p class="text-sm text-textSec mb-2">Visitas Totales</p>
+        <p id="statTotal" class="text-3xl font-semibold text-textMain">—</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-sm border border-slate-100 p-6">
+        <p class="text-sm text-textSec mb-2">Máximo de Visitas por Hora</p>
+        <p id="statMax" class="text-3xl font-semibold text-textMain">—</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-sm border border-slate-100 p-6">
+        <p class="text-sm text-textSec mb-2">Tendencia</p>
+        <p id="statTrend" class="text-3xl font-semibold text-success">—</p>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-lg shadow-sm border border-slate-100 p-6">
+      <div id="loadingState" class="hidden text-sm text-textSec mb-4">Cargando datos…</div>
+      <div class="relative h-80 w-full">
+        <canvas id="analyticsChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./assets/js/admin-analytics.js"></script>
+</body>
+</html>
